@@ -100,6 +100,16 @@ describe('Sort by Recently Listed', () => {
             
     })
 
+describe('Go to Marketplace and check all catalogue button', () => {
+        it('clicking "Drops"and "View Drops"', () => {
+            cy.get('[data-test-id="nav-drops"]').click()
+            cy.url().should('include', '/nft/drops')
+            cy.get('[data-test-id="drop-list-view-drop-button"]').should('be.visible').click()
+            //Miami Minted is the latets drops
+            cy.get('[data-test-id="drop-title"]').should('have.text','Miami Minted')
+        })
+    })
+
 describe('Searching in search box', () => {
 
         it('Search basketball related NFT"', () => {
