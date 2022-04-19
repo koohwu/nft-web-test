@@ -9,6 +9,15 @@ describe('Go to Home Page', () => {
 })
 
 describe('Go to Marketplace and check all catalogue button', () => {
+
+    function checkCardAndBack (category){
+        cy.get('[data-test-id="nftCard-container"]').first().click()
+        cy.get('[data-test-id="nftDetail-tag"]').contains(category)
+        cy.get('[data-test-id="back-button"]').click()
+        cy.log('checked included tag',category)
+        return category
+    }
+    
     it('clicking "Market Place"', () => {
         cy.get('[data-test-id="nav-marketplace"]').click()
         cy.url().should('include', '/nft/marketplace')
@@ -17,49 +26,92 @@ describe('Go to Marketplace and check all catalogue button', () => {
 
     it('clicking "Art" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-art-button"]').click()
+        cy.get('[data-test-id="marketplace-category-art-button"]').should('be.visible').click()
         
+    })
+
+    it('clicking First Item and contain Art checking tag', () => {
+
+        checkCardAndBack('Art')
+      
     })
 
     it('clicking "Celebrities" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-celebrities-button"]').click()
+        cy.get('[data-test-id="marketplace-category-celebrities-button"]').should('be.visible').click()
             
+    })
+
+    it('clicking First Item and checking contain Celebrities tag', () => {
+
+        checkCardAndBack('Celebrities')
     })
 
     it('clicking "Gaming" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-gaming-button"]').click()
+        cy.get('[data-test-id="marketplace-category-gaming-button"]').should('be.visible').click()
                 
+    })
+
+    it('clicking First Item and checking contain Gaming tag', () => {
+
+    
+        checkCardAndBack('Gaming')
     })
 
     it('clicking "Sport" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-sport-button"]').click()
+        cy.get('[data-test-id="marketplace-category-sport-button"]').should('be.visible').click()
                     
+    })
+
+    it('clicking First Item and checking contain Sport tag', () => {
+
+    
+        checkCardAndBack('Sport')
     })
 
     it('clicking "Music" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-music-button"]').click()
+        cy.get('[data-test-id="marketplace-category-music-button"]').should('be.visible').click()
                         
      })
 
+    it('clicking First Item and checking contain Music tag', () => {
+
+    
+        checkCardAndBack('Music')
+    })
+
     it('clicking "Crypto" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-crypto-button"]').click()
+        cy.get('[data-test-id="marketplace-category-crypto-button"]').should('be.visible').click()
                             
+    })
+
+    it('clicking First Item and checking contain Crypto tag', () => {
+
+    
+        checkCardAndBack('Crypto')
     })
 
     it('clicking "Cross chain" button', () => {
 
-        cy.get('[data-test-id="marketplace-category-cross chain-button"]').click()
+        cy.get('[data-test-id="marketplace-category-cross chain-button"]').should('be.visible').click()
                                 
+    })
+
+    it('clicking First Item and checking Cross chain type', () => {
+        cy.get('[data-test-id="nftCard-container"]').first().click()
+        cy.get('[data-test-id="listing-chain-type"]').invoke('text').then((text) => {
+            expect(text).not.equal('Crypto.org Chain')
+        })
+        cy.get('[data-test-id="back-button"]').click()
     })
 
     it('clicking "All" button', () => {
 
-        cy.contains('All').click()
+        cy.contains('All').should('be.visible').click()
                                     
     })
 
@@ -67,9 +119,9 @@ describe('Sort by Recently Listed', () => {
 
     it('clicking "Recently Listed"', () => {
 
-        cy.get('[data-test-id="marketplace-sort-button"]').click()
+        cy.get('[data-test-id="marketplace-sort-button"]').should('be.visible').click()
 
-        cy.get('[data-test-id="marketplace-sort-recentlyListed"]').click() 
+        cy.get('[data-test-id="marketplace-sort-recentlyListed"]').should('be.visible').click() 
         
 
          })
@@ -104,6 +156,7 @@ describe('Go to Marketplace and check all catalogue button', () => {
         it('clicking "Drops"and "View Drops"', () => {
             cy.get('[data-test-id="nav-drops"]').click()
             cy.url().should('include', '/nft/drops')
+            cy.wait(1000)
             cy.get('[data-test-id="drop-list-view-drop-button"]').should('be.visible').click()
             //Miami Minted is the latets drops
             cy.get('[data-test-id="drop-title"]').should('have.text','Miami Minted')
@@ -118,10 +171,10 @@ describe('Searching in search box', () => {
             .should('have.value', 'basketball')
             .type('{enter}')
             //wait for search result
-            cy.wait(3000)
+            cy.wait(2000)
             cy.screenshot('Search-Result')   
         })   
 
 
-    }) 
+   }) 
 })
