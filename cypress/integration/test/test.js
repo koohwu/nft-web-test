@@ -17,7 +17,7 @@ describe('Go to Marketplace and check all catalogue button', () => {
         cy.log('checked included tag',category)
         return category
     }
-    
+
     it('clicking "Market Place"', () => {
         cy.get('[data-test-id="nav-marketplace"]').click()
         cy.url().should('include', '/nft/marketplace')
@@ -152,7 +152,7 @@ describe('Sort by Recently Listed', () => {
             
     })
 
-describe('Go to Marketplace and check all catalogue button', () => {
+describe('Go to Drops Page and Click View Drop', () => {
         it('clicking "Drops"and "View Drops"', () => {
             cy.get('[data-test-id="nav-drops"]').click()
             cy.url().should('include', '/nft/drops')
